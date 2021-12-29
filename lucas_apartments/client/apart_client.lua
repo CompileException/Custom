@@ -129,8 +129,8 @@ current_int = 0
 ----isBuy Methode----
 ---------------------
  
-RegisterNetEvent("herorp:isBuy")
-AddEventHandler("herorp:isBuy", function()
+RegisterNetEvent("lucas_houses:isBuy")
+AddEventHandler("lucas_houses:isBuy", function()
   isBuy = 1
 end)
 
@@ -138,8 +138,8 @@ end)
 ---isNotBuy METHODE---
 ----------------------
  
-RegisterNetEvent("herorp:isNotBuy")
-AddEventHandler("herorp:isNotBuy", function()
+RegisterNetEvent("lucas_houses:isNotBuy")
+AddEventHandler("lucas_houses:isNotBuy", function()
   isBuy = 0
 end)
 
@@ -147,8 +147,8 @@ end)
 ----isMine Methode----
 ----------------------
 
-RegisterNetEvent("herorp:isMine")
-AddEventHandler("herorp:isMine", function()
+RegisterNetEvent("lucas_houses:isMine")
+AddEventHandler("lucas_houses:isMine", function()
   isBuy = 2
 end)
 
@@ -156,14 +156,14 @@ end)
 ---getCash Methode----
 ----------------------
 
-RegisterNetEvent("herorp:getCash")
-AddEventHandler("herorp:getCash", function(moneyparm, dirtymoneyparm)
+RegisterNetEvent("lucas_houses:getCash")
+AddEventHandler("lucas_houses:getCash", function(moneyparm, dirtymoneyparm)
   money = moneyparm
   dirtymoney = dirtymoneyparm
 end)
 
-RegisterNetEvent("herorp:getlockstatus")
-AddEventHandler("herorp:getlockstatus", function(statusparam)
+RegisterNetEvent("lucas_houses:getlockstatus")
+AddEventHandler("lucas_houses:getlockstatus", function(statusparam)
   status = statusparam
     debugprint('' .. statusparam)
 
@@ -221,7 +221,7 @@ function MenuInsideAppartement()
  
     for i=1, #interiors do
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), interiors[i].xo,interiors[i].yo,interiors[i].zo, true) < 1.599 then
-            TriggerServerEvent("herorp:getCash", interiors[i].name)
+            TriggerServerEvent("lucas_houses:getCash", interiors[i].name)
             Wait(250)
             if isBuy == 2 then
             	print(money)
@@ -253,7 +253,7 @@ function deposerargent(apart)
 	if (GetOnscreenKeyboardResult()) then
 		local txt = GetOnscreenKeyboardResult()
 		if (string.len(txt) > 0) then
-			TriggerServerEvent("herorp:depositcash", txt, apart)
+			TriggerServerEvent("lucas_houses:depositcash", txt, apart)
 			CloseMenu()
 		end
 	end
@@ -268,7 +268,7 @@ function deposersale(apart)
 	if (GetOnscreenKeyboardResult()) then
 		local txt = GetOnscreenKeyboardResult()
 		if (string.len(txt) > 0) then
-			TriggerServerEvent("herorp:depositdirtycash", txt, apart)
+			TriggerServerEvent("lucas_houses:depositdirtycash", txt, apart)
 			CloseMenu()
 		end
 	end
@@ -285,7 +285,7 @@ function retirerargent(apart)
 		local txt = GetOnscreenKeyboardResult()
 		if (string.len(txt) > 0) then
 			print("ok c bon")
-			TriggerServerEvent("herorp:takecash", txt, apart)
+			TriggerServerEvent("lucas_houses:takecash", txt, apart)
 			CloseMenu()
 		end
 	end
@@ -300,7 +300,7 @@ function retirersale(apart)
 	if (GetOnscreenKeyboardResult()) then
 		local txt = GetOnscreenKeyboardResult()
 		if (string.len(txt) > 0) then
-			TriggerServerEvent("herorp:takedirtycash", txt, apart)
+			TriggerServerEvent("lucas_houses:takedirtycash", txt, apart)
 			CloseMenu()
 		end
 	end
@@ -345,7 +345,7 @@ function MenuAppartement()
     for i=1, #interiors do
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), interiors[i].xe,interiors[i].ye,interiors[i].ze, true) < 1.599 then
 		CloseMenu()
-            TriggerServerEvent("herorp:getAppart", interiors[i].name)
+            TriggerServerEvent("lucas_houses:getAppart", interiors[i].name)
             Wait(250)
 			
 			if isBuy == 1 then		
@@ -376,7 +376,7 @@ end
 function Vendre()
     for i=1, #interiors do
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), interiors[i].xe,interiors[i].ye,interiors[i].ze, true) < 1.599 then
-            TriggerServerEvent("herorp:sellAppart", interiors[i].name, interiors[i].price)
+            TriggerServerEvent("lucas_houses:sellAppart", interiors[i].name, interiors[i].price)
             CloseMenu()
         end
     end
@@ -385,7 +385,7 @@ end
 function Acheter()
     for i=1, #interiors do
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), interiors[i].xe,interiors[i].ye,interiors[i].ze, true) < 1.599 then
-            TriggerServerEvent("herorp:buyAppart", interiors[i].name, interiors[i].price)
+            TriggerServerEvent("lucas_houses:buyAppart", interiors[i].name, interiors[i].price)
             CloseMenu()
         end
     end

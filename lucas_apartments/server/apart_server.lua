@@ -35,8 +35,8 @@ local dirtymoney = 0
 ---GET APARTMENT METHODE---
 ---------------------------
 
-RegisterServerEvent("herorp:getAppart")
-AddEventHandler('herorp:getAppart', function(name)
+RegisterServerEvent("lucas_houses:getAppart")
+AddEventHandler('lucas_houses:getAppart', function(name)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.getIdentifier()
@@ -50,12 +50,12 @@ AddEventHandler('herorp:getAppart', function(name)
           end
           if count > 0 then
           	if (result[1].identifier == player) then
-          		TriggerClientEvent('herorp:isMine', source)
+          		TriggerClientEvent('lucas_houses:isMine', source)
           	else
-              	TriggerClientEvent('herorp:isBuy', source)
+              	TriggerClientEvent('lucas_houses:isBuy', source)
           	end
           else
-          	TriggerClientEvent('herorp:isNotBuy', source)
+          	TriggerClientEvent('lucas_houses:isNotBuy', source)
           end
         end
       end)
@@ -69,12 +69,12 @@ AddEventHandler('herorp:getAppart', function(name)
         end
         if count > 0 then
           if (result[1].identifier == player) then
-            TriggerClientEvent('herorp:isMine', source)
+            TriggerClientEvent('lucas_houses:isMine', source)
           else
-            TriggerClientEvent('herorp:isBuy', source)
+            TriggerClientEvent('lucas_houses:isBuy', source)
           end
         else
-          TriggerClientEvent('herorp:isNotBuy', source)
+          TriggerClientEvent('lucas_houses:isNotBuy', source)
         end
       end
     end
@@ -85,8 +85,8 @@ end)
 					----------------------
 					
 					-- UPDATE user_appartement SET `money`=@cash WHERE name = @nom",{['@cash'] = newmoney, ['@nom'] = apart}, function(data)
-RegisterServerEvent("herorp:setlockapartment")
-AddEventHandler('herorp:setlockapartment', function(status, apart)
+RegisterServerEvent("lucas_houses:setlockapartment")
+AddEventHandler('lucas_houses:setlockapartment', function(status, apart)
 	if (mode == "Async") then
 		MySQL.Async.fetchAll("SELECT locked FROM user_appartement WHERE name = @nom", {['@nom'] = apart}, function (result)
             if (result) then
@@ -97,8 +97,8 @@ AddEventHandler('herorp:setlockapartment', function(status, apart)
       end
     end)
 	
-RegisterServerEvent("herorp:getlockstatus")
-AddEventHandler('herorp:getlockstatus', function(name)
+RegisterServerEvent("lucas_houses:getlockstatus")
+AddEventHandler('lucas_houses:getlockstatus', function(name)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
   local player = user.getIdentifier()
@@ -107,7 +107,7 @@ AddEventHandler('herorp:getlockstatus', function(name)
      MySQL.Async.fetchAll("SELECT * FROM user_appartement WHERE name = @nom", {['@nom'] = tostring(name)}, function (result)
                 if (result) then
                   status = result[1].locked
-                  TriggerClientEvent('herorp:getlockstatus', status)
+                  TriggerClientEvent('lucas_houses:getlockstatus', status)
                 end
               end)
             elseif mode == "MySQL" then
@@ -116,7 +116,7 @@ AddEventHandler('herorp:getlockstatus', function(name)
               if (result) then
                 money = result[1].money
                 dirtymoney = result[1].dirtymoney
-                TriggerClientEvent('herorp:getlockstatus', status)
+                TriggerClientEvent('lucas_houses:getlockstatus', status)
               end
             end
           end)
@@ -125,8 +125,8 @@ AddEventHandler('herorp:getlockstatus', function(name)
 					---GET CASH METHODE---
 					----------------------
 
-RegisterServerEvent("herorp:getCash")
-AddEventHandler('herorp:getCash', function(name)
+RegisterServerEvent("lucas_houses:getCash")
+AddEventHandler('lucas_houses:getCash', function(name)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.getIdentifier()
@@ -136,7 +136,7 @@ AddEventHandler('herorp:getCash', function(name)
         if (result) then
           money = result[1].money
           dirtymoney = result[1].dirtymoney
-          TriggerClientEvent('herorp:getCash', source, money, dirtymoney)
+          TriggerClientEvent('lucas_houses:getCash', source, money, dirtymoney)
         end
       end)
     elseif mode == "MySQL" then
@@ -145,7 +145,7 @@ AddEventHandler('herorp:getCash', function(name)
       if (result) then
         money = result[1].money
         dirtymoney = result[1].dirtymoney
-        TriggerClientEvent('herorp:getCash', source, money, dirtymoney)
+        TriggerClientEvent('lucas_houses:getCash', source, money, dirtymoney)
       end
     end
   end)
@@ -155,8 +155,8 @@ end)
 					--DEPOSIT CASH METHODE
 					----------------------
 
-RegisterServerEvent("herorp:depositcash")
-AddEventHandler('herorp:depositcash', function(cash, apart)
+RegisterServerEvent("lucas_houses:depositcash")
+AddEventHandler('lucas_houses:depositcash', function(cash, apart)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.getIdentifier()
@@ -185,7 +185,7 @@ AddEventHandler('herorp:depositcash', function(cash, apart)
         end
       end
 
-      TriggerClientEvent('herorp:getCash', source, money, dirtymoney)
+      TriggerClientEvent('lucas_houses:getCash', source, money, dirtymoney)
     else
       --TriggerClientEvent("pNotify:SendNotification", -1, {text = txt[lang]['nocash'], type = "error", timeout = 5000, layouts = "bottomCenter"})
     end
@@ -196,8 +196,8 @@ end)
 					--SCHWARZGELD WEGLEGEN
 					----------------------
 
-RegisterServerEvent("herorp:depositdirtycash")
-AddEventHandler('herorp:depositdirtycash', function(cash, apart)
+RegisterServerEvent("lucas_houses:depositdirtycash")
+AddEventHandler('lucas_houses:depositdirtycash', function(cash, apart)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.getIdentifier()
@@ -226,7 +226,7 @@ AddEventHandler('herorp:depositdirtycash', function(cash, apart)
         end
       end
 
-      TriggerClientEvent('herorp:getCash', source, money, dirtymoney)
+      TriggerClientEvent('lucas_houses:getCash', source, money, dirtymoney)
     else
       --TriggerClientEvent("pNotify:SendNotification", -1, {text = txt[lang]['nocash'], type = "error", timeout = 5000, layouts = "bottomCenter"})
     end
@@ -237,8 +237,8 @@ end)
 					---GELD NEHMEN---
 					----------------------
 
-RegisterServerEvent("herorp:takecash")
-AddEventHandler('herorp:takecash', function(cash, apart)
+RegisterServerEvent("lucas_houses:takecash")
+AddEventHandler('lucas_houses:takecash', function(cash, apart)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.getIdentifier()
@@ -274,7 +274,7 @@ AddEventHandler('herorp:takecash', function(cash, apart)
       end
     end
 
-    TriggerClientEvent('herorp:getCash', source, money, dirtymoney)
+    TriggerClientEvent('lucas_houses:getCash', source, money, dirtymoney)
   end)
 end)
 
@@ -282,8 +282,8 @@ end)
 					---SCHWARZGELD NEHMEN-
 					----------------------
 
-RegisterServerEvent("herorp:takedirtycash")
-AddEventHandler('herorp:takedirtycash', function(cash, apart)
+RegisterServerEvent("lucas_houses:takedirtycash")
+AddEventHandler('lucas_houses:takedirtycash', function(cash, apart)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.getIdentifier()
@@ -319,7 +319,7 @@ AddEventHandler('herorp:takedirtycash', function(cash, apart)
       end
     end
 
-    TriggerClientEvent('herorp:getCash', source, money, dirtymoney)
+    TriggerClientEvent('lucas_houses:getCash', source, money, dirtymoney)
   end)
 end)
 
@@ -327,8 +327,8 @@ end)
 					---APARTMENT KAUFEN---
 					----------------------
 
-RegisterServerEvent("herorp:buyAppart")
-AddEventHandler('herorp:buyAppart', function(name, price)
+RegisterServerEvent("lucas_houses:buyAppart")
+AddEventHandler('lucas_houses:buyAppart', function(name, price)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.getIdentifier()
@@ -342,7 +342,7 @@ AddEventHandler('herorp:buyAppart', function(name, price)
         local executed_query2 = MySQL:executeQuery("INSERT INTO user_appartement (`identifier`, `name`, `price`) VALUES (@username, @name, @price)", {['@username'] = player, ['@name'] = name, ['@price'] = price})
       end
     	--TriggerClientEvent("pNotify:SendNotification", -1, {text = txt[lang]['welcome'], type = "success", timeout = 5000, layouts = "bottomCenter"})
-    	TriggerClientEvent('herorp:isMine', source)
+    	TriggerClientEvent('lucas_houses:isMine', source)
     else
     	--TriggerClientEvent("pNotify:SendNotification", -1, {text = txt[lang]['nocash'], type = "error", timeout = 5000, layouts = "bottomCenter"})
     end
@@ -353,8 +353,8 @@ end)
 					--APARTMENT VERKAUFEN
 					----------------------
 
-RegisterServerEvent("herorp:sellAppart")
-AddEventHandler('herorp:sellAppart', function(name, price)
+RegisterServerEvent("lucas_houses:sellAppart")
+AddEventHandler('lucas_houses:sellAppart', function(name, price)
   local source = source
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.getIdentifier()
@@ -369,6 +369,6 @@ AddEventHandler('herorp:sellAppart', function(name, price)
         {['@username'] = player, ['@name'] = name})
       end
       --TriggerClientEvent("pNotify:SendNotification", -1, {text = txt[lang]['estVendu'], type = "success", timeout = 5000, layouts = "bottomCenter"})
-      TriggerClientEvent('herorp:isNotBuy', source)
+      TriggerClientEvent('lucas_houses:isNotBuy', source)
   end)
 end)
