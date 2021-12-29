@@ -1,0 +1,344 @@
+<html>
+
+<head>
+    <title>Garage @ Apoysus</title>
+    <link rel="stylesheet" type="text/css" href="ui.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="ui.js"></script>
+</head>
+
+<body>
+    <div class="container noselect">
+        <div class="head">
+            <img class="icon" src="garage.png">
+            <div class="one-bar"><b>Lucas Garage</div></b>
+                <div class="logotext"><b>Suche dir eine Aktion aus...</div></b>
+                    <img class="close" src="close.png">
+
+                    <div class="head-buttons">
+                        <div id="btn-1" class="head-switch-in">
+                            Ausparken
+                        </div>
+
+                        <br>
+
+                        <div id="btn-2" class="head-switch-out selected">
+                            Einparken
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+                </div>
+                <div class="auto">
+                    <div class="content">
+                        <div id="vehicle-list" class="garage-vehicles">
+                            <!-- Fahrzeuge -->
+                        </div>
+                    </div>
+                </div>
+</body>
+
+</html>
+
+<style>
+    * {
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    .container {
+        display: none;
+        position: relative;
+        margin: auto;
+        width: 1600px;
+        height: 800px;
+        top: 100px;
+        background-color: rgba(36, 36, 36, 0.950);
+    }
+    
+    .head {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        background-color: rgb(26, 26, 26);
+        width: 28%;
+        height: 800px;
+    }
+    
+    .icon {
+        position: relative;
+        top: 0px;
+        left: -15px;
+        height: 275px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .close {
+        position: relative;
+        width: 25px;
+        bottom: 100px;
+        left: 1130px;
+        float: right;
+        color: white;
+    }
+    
+    .one-bar {
+        position: relative;
+        margin-left: 448px;
+        margin-right: auto;
+        width: 1152.3px;
+        height: 69px;
+        background-color: rgb(36, 36, 36);
+        border-top: 30px solid #7d1bf1;
+        border-bottom: 5px solid #7d1bf1;
+        margin-top: -275px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 80px;
+        font-size: 30px;
+        color: rgb(255, 255, 255);
+    }
+    
+    .logotext {
+        position: relative;
+        width: 400px;
+        height: 50px;
+        text-align: center;
+        font-size: 20px;
+        top: 170px;
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: lighter;
+        background-color: rgba(65, 105, 225, 0);
+        color: white;
+        border-left: 8px solid #7d1bf1;
+    }
+    
+    .head-buttons {
+        position: relative;
+        width: 400px;
+        height: 50px;
+        text-align: center;
+        font-size: 20px;
+        top: 310px;
+        left: -25px;
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: lighter;
+    }
+    
+    .head-switch-in {
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0);
+        float: left;
+        margin: 25px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 50px;
+        font-size: 20px;
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: lighter;
+        color: #fff;
+    }
+    
+    .head-switch-out {
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        bottom: 0px;
+        background-color: rgba(255, 255, 255, 0);
+        float: left;
+        margin: 25px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 50px;
+        font-size: 20px;
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: lighter;
+        color: #fff;
+    }
+    
+    .divider {
+        position: relative;
+        top: 150px;
+        width: 80%;
+        border: white 1px solid;
+    }
+    
+    .selected {
+        background-color: rgba(65, 105, 225, 0);
+        color: white;
+        border-left: 8px solid #7d1bf1;
+    }
+    
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .auto {
+        margin-left: 10px;
+        margin-top: -680px;
+        overflow: auto;
+        height: 550px;
+        width: 1500px;
+        padding: 10px;
+    }
+    
+    .garage-vehicles {
+        display: block;
+        position: relative;
+        width: 1110px;
+        height: 660px;
+        top: 350px;
+        left: 450px;
+    }
+    
+    .vehicle {
+        position: relative;
+        width: 125%;
+        margin-top: -350px;
+        height: 7%;
+    }
+    
+    .vehicle-inner {
+        width: 20%;
+        height: 190%;
+        background-color: rgb(29, 29, 29);
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+        margin-left: 70px;
+        top: 3%;
+        float: left;
+        margin-bottom: 50px;
+    }
+    
+    .inner-icon {
+        position: relative;
+        width: 45px;
+        top: 20px;
+        left: 5%;
+    }
+    
+    .inner-label-knz {
+        position: relative;
+        top: -32px;
+        left: 40px;
+        width: 89%;
+        text-align: center;
+        color: rgb(255, 255, 255);
+        font-weight: 350;
+        letter-spacing: 1px;
+    }
+    
+    .noselect {
+        -webkit-touch-callout: none;
+        /* iOS Safari */
+        -webkit-user-select: none;
+        /* Safari */
+        -khtml-user-select: none;
+        /* Konqueror HTML */
+        -moz-user-select: none;
+        /* Old versions of Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none;
+        /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+    }
+</style>
+
+<script>
+    var toggle = false;
+
+    $(document).ready(function() {
+        window.addEventListener('message', function(event) {
+            if (event.data.action == 'open') {
+
+                $(".head-switch-in").removeClass("selected");
+                $(".head-switch-out").removeClass("selected");
+                $(".head-switch-in").addClass("selected");
+
+                const vehicles = document.getElementById("vehicle-list");
+                vehicles.innerHTML = '';
+
+                $.post('http://lucas_garage/enable-parkout', JSON.stringify({}));
+
+                toggle = false;
+
+                $('.container').css('display', 'block');
+
+            } else if (event.data.action == 'add') {
+
+                AddCar(event.data.plate, event.data.model);
+
+            } else {
+                $('.container').css('display', 'none');
+            }
+        });
+
+        $(".close").click(function() {
+            $('.container').css('display', 'none');
+            $.post('http://lucas_garage/escape', JSON.stringify({}));
+        });
+
+        $(".head-switch-in").click(function() {
+            $(".head-switch-in").removeClass("selected");
+            $(".head-switch-out").removeClass("selected");
+            $(".head-switch-in").addClass("selected");
+
+            const vehicles = document.getElementById("vehicle-list");
+            vehicles.innerHTML = '';
+
+            $.post('http://lucas_garage/enable-parkout', JSON.stringify({}));
+
+            toggle = false;
+        });
+
+        $(".head-switch-out").click(function() {
+            $(".head-switch-in").removeClass("selected");
+            $(".head-switch-out").removeClass("selected");
+            $(".head-switch-out").addClass("selected");
+
+            const vehicles = document.getElementById("vehicle-list");
+            vehicles.innerHTML = '';
+
+            $.post('http://lucas_garage/enable-parking', JSON.stringify({}));
+
+            toggle = true;
+        });
+
+        function AddCar(plate, model) {
+            $("#vehicle-list").append(`
+      
+      <div class="vehicle" onclick="parkOut('` + plate + `');" data-plate="` + plate + `">
+        <div class="vehicle-inner">
+            <img class="inner-icon" src="car.png">
+            <p class="inner-label-knz"> Modell: ` + model + " <br> Kennzeichen: " + plate + `</p>
+        </div>
+      </div>
+
+      `);
+        }
+    });
+
+    function parkOut(plate) {
+        if (toggle == false) {
+            $('.container').css('display', 'none');
+            $.post('http://lucas_garage/escape', JSON.stringify({}));
+            $.post('http://lucas_garage/park-out', JSON.stringify({
+                plate: plate
+            }));
+        } else if (toggle == true) {
+            $('.container').css('display', 'none');
+            $.post('http://lucas_garage/escape', JSON.stringify({}));
+            $.post('http://lucas_garage/park-in', JSON.stringify({
+                plate: plate
+            }));
+        }
+    }
+</script>'));</script>
